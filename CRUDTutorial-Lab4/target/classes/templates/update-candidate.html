@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Update Candidate</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+</head>
+<body>
+<div class="container my-4" th:object="${candidate}">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h3 class="m-0">Update Candidate</h3>
+    <a class="btn btn-outline-secondary btn-sm" th:href="@{/candidates/list}">Back to list</a>
+  </div>
+
+  <form th:action="@{/candidates/update/{id}(id=${candidate.id})}" method="post" novalidate>
+    <!-- Name -->
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input id="name" type="text" th:field="*{name}" class="form-control"
+             th:classappend="${#fields.hasErrors('name')} ? ' is-invalid'">
+      <div class="invalid-feedback" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Invalid</div>
+    </div>
+
+    <!-- Email -->
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input id="email" type="email" th:field="*{email}" class="form-control"
+             th:classappend="${#fields.hasErrors('email')} ? ' is-invalid'">
+      <div class="invalid-feedback" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Invalid</div>
+    </div>
+
+    <!-- Age -->
+    <div class="form-group">
+      <label for="age">Age</label>
+      <input id="age" type="number" min="0" max="120" th:field="*{age}" class="form-control"
+             th:classappend="${#fields.hasErrors('age')} ? ' is-invalid'">
+      <div class="invalid-feedback" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Invalid</div>
+    </div>
+
+    <div class="d-flex justify-content-end">
+      <button type="submit" class="btn btn-primary">Update Candidate</button>
+    </div>
+  </form>
+</div>
+</body>
+</html>
